@@ -1,0 +1,22 @@
+from building import *
+
+# get current directory
+cwd     = GetCurrentDir()
+# The set of source files associated with this SConscript file.
+src     = Glob('src/*.c')
+src    += Glob('examples/vt_imshow.c')
+# src    += Glob('examples/vt_monitor.c')
+# src    += Glob('examples/vt_color.c')
+# src    += Glob('examples/vt_lsimg.c')
+
+path   =  [cwd + '/src']
+path   += [cwd + '/']
+path   += [cwd + '/examples']
+
+CPPDEFINES = [
+    'HAVE_CCONFIG_H',
+]
+
+group = DefineGroup('vt_imshow', src, depend = [''], CPPPATH = path, CPPDEFINES = CPPDEFINES)
+
+Return('group')
